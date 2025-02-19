@@ -20,12 +20,12 @@
         const quantityEl = document.getElementById("quantity");
         let quantity = 1;
     
-        // Qo'shish tugmalarini topish
+        // Barcha "Qo'shish" tugmalarini olish
         document.querySelectorAll(".add-to-cart").forEach(button => {
             button.addEventListener("click", function() {
-                const productCard = this.parentElement;
-                const productName = productCard.querySelector("p").textContent;
-                const productPrice = productCard.querySelector("span").textContent;
+                const card = button.closest(".card");
+                const productName = card.querySelector("p").textContent;
+                const productPrice = card.querySelector("span").textContent;
     
                 // Modal oynaga mahsulot nomi va narxini joylash
                 document.getElementById("product-name").textContent = productName;
