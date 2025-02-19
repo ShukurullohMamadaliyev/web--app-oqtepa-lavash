@@ -121,3 +121,21 @@ body {
     cursor: pointer;
 }
 
+.cart-notification {
+    position: fixed;
+    bottom: -100px; /* Sahifa pastida yashirin holatda turadi */
+    left: 50%;
+    transform: translateX(-50%);
+    background: #f44336; /* Qizil rang (o‘zgartirish mumkin) */
+    color: white;
+    padding: 15px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: bottom 0.5s ease-in-out;
+}
+.cart-notification.show {
+    bottom: 20px; /* Ko‘rinadigan holat */
+}
+
+

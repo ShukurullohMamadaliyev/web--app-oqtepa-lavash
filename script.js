@@ -13,35 +13,34 @@
             });
         });
     });
+ 
+    
 
     document.addEventListener("DOMContentLoaded", function() {
         const modal = document.getElementById("modal");
         const closeModal = document.querySelector(".close");
         const quantityEl = document.getElementById("quantity");
+        const cartNotification = document.getElementById("cart-notification");
         let quantity = 1;
     
-        // Barcha "Qo'shish" tugmalarini olish
+        // Barcha "Qo'shish" tugmalarini olaylik
         document.querySelectorAll(".add-to-cart").forEach(button => {
             button.addEventListener("click", function() {
                 const card = button.closest(".card");
                 const productName = card.querySelector("p").textContent;
                 const productPrice = card.querySelector("span").textContent;
     
-                // Modal oynaga mahsulot nomi va narxini joylash
                 document.getElementById("product-name").textContent = productName;
                 document.getElementById("product-price").textContent = "Narx: " + productPrice;
-                
-                // Modal oynani ochish
+    
                 modal.style.display = "flex";
             });
         });
     
-        // Modal oynani yopish
         closeModal.addEventListener("click", function() {
             modal.style.display = "none";
         });
     
-        // Miqdorni oshirish va kamaytirish
         document.getElementById("increase").addEventListener("click", function() {
             quantity++;
             quantityEl.textContent = quantity;
@@ -54,10 +53,17 @@
             }
         });
     
-        // Savatchaga qo'shish tugmasi
+        // Savatchaga qo‘shish tugmasi
         document.getElementById("add-to-cart").addEventListener("click", function() {
-            alert("Mahsulot savatchaga qo'shildi!");
             modal.style.display = "none";
+    
+            // Bildirish oynasini ko‘rsatish
+            cartNotification.classList.add("show");
+    
+            // 3 soniyadan keyin o‘chirib tashlash
+            setTimeout(() => {
+                cartNotification.classList.remove("show");
+            }, 3000);
         });
     });
     
