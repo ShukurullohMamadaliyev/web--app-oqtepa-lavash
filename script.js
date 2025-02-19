@@ -66,4 +66,27 @@
             }, 3000);
         });
     });
+
+    // Modal oynani ochish/yopish
+function toggleCart() {
+    document.getElementById("cartModal").classList.toggle("active");
+}
+
+// Savatga mahsulot qo‘shish
+function addToCart(productName, price) {
+    let cartItems = document.getElementById("cartItems");
+    let totalPrice = document.getElementById("totalPrice");
+
+    // Yangi element yaratish
+    let item = document.createElement("div");
+    item.innerHTML = `<p>${productName} - <strong>${price} so'm</strong></p>`;
+    
+    // Savatga qo‘shish
+    cartItems.appendChild(item);
+    
+    // Jami narxni yangilash
+    let currentTotal = parseInt(totalPrice.innerText) || 0;
+    totalPrice.innerText = (currentTotal + price) + " so'm";
+}
+
     

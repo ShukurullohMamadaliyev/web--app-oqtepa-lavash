@@ -84,6 +84,22 @@
     <span>🛒 Mahsulot savatchaga qo‘shildi!</span>
 </div>
 
+<!-- Savatcha tugmasi -->
+<div class="cart-button" onclick="toggleCart()">
+    <img src="https://cdn-icons-png.flaticon.com/512/107/107831.png" alt="Savatcha">
+</div>
+
+<!-- Savat modal oynasi -->
+<div id="cartModal" class="cart-modal">
+    <div class="cart-content">
+        <span class="close" onclick="toggleCart()">&times;</span>
+        <h2>Savat</h2>
+        <div id="cartItems"></div>
+        <p><strong>Jami:</strong> <span id="totalPrice">0 so'm</span></p>
+        <button class="order-button">Buyurtma berish</button>
+    </div>
+</div>
+
 
 <script src="script.js"></script>
 
