@@ -132,7 +132,7 @@
         }
     
         // Mahsulotlarni ro‘yxatga aylantirish
-        let message = `📞 *Telefon raqami:* ${phoneNumber}\n\n🛒 *Sizning buyurtmangiz:*\n\n`;
+        let message = `📞 *Telefon raqami:* ${phoneNumber}\n\n🛒 *Yangi buyurtma:*\n\n`;
         for (let item of cartItems) {
             message += `📌 ${item.innerText}\n`;
         }
