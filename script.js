@@ -107,16 +107,59 @@
     
         // Jami narxni 0 so'm qilish
         totalPrice.innerText = "0 so'm";
-    });
+    }); 
+
+
+
+
+
+    function sendCartToTelegram() {
+        let botToken = "7889586011:AAEfawk-CC14Z7q_zRlNNl5VabSpOc4ds9A"; // O'z tokeningiz
+        let chatId = "5521343193"; // O'zingizning Telegram ID
+        let cartItems = document.getElementById("cartItems").children;
+        let totalPrice = document.getElementById("totalPrice").innerText;
     
-    document.querySelector(".order-button").addEventListener("click", function () {
-        let phoneNumber = prompt("Raqamingizni kiriting:");
-    
-        if (phoneNumber) {
-            alert("Rahmat! Siz bilan operatorlarimiz tez orada bog'lanadi.");
-            
-            // Keyinchalik bu yerda ma'lumotlarni Telegram botga yuboramiz
-            console.log("Buyurtma raqami:", phoneNumber);
+        if (cartItems.length === 0) {
+            alert("Savat bo‘sh! ❌");
+            return;
         }
-    });
+    
+        // Raqamni kiritish oynasi
+        let phoneNumber = prompt("📞 Iltimos, telefon raqamingizni kiriting:");
+        if (!phoneNumber || phoneNumber.trim() === "") {
+            alert("❌ Raqam kiritilmadi!");
+            return;
+        }
+    
+        // Mahsulotlarni ro‘yxatga aylantirish
+        let message = `📞 *Telefon raqami:* ${phoneNumber}\n\n🛒 *Sizning buyurtmangiz:*\n\n`;
+        for (let item of cartItems) {
+            message += `📌 ${item.innerText}\n`;
+        }
+        message += `\n💰 *Jami narx:* ${totalPrice}`;
+    
+        // Telegramga jo‘natish
+        fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                chat_id: chatId,
+                text: message,
+                parse_mode: "Markdown"
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("✅ Buyurtma yuborildi:", data);
+            alert("✅ Buyurtma qabul qilindi! Operatorlarimiz tez orada bog‘lanadi.");
+        })
+        .catch(error => {
+            console.error("❌ Xatolik:", error);
+            alert("❌ Xatolik yuz berdi, qayta urinib ko‘ring.");
+        });
+    }
+    
+    // "Buyurtma berish" tugmasiga event qo‘shish
+    document.querySelector(".order-button").addEventListener("click", sendCartToTelegram);
+    
     
